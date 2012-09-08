@@ -37,22 +37,28 @@
 			</div>
 			<div id="header">
 				<div id="logo">
-					<h1><a href="#">Home</a></h1>
+					<h1><a href="#">Contact</a></h1>
 				</div>
 			</div>
 			<div id="page">
 				<div id="content">
 					<div class="box">
-						<h2>Welkom bij groep 7!</h2>
-						<p>
-                                                    Wij zijn:
-                                                        <li>Twan Baten</li>
-                                                        <li>Patrick Hollenberg</li>
-                                                        <li>Kevin Haring</li>
-                                                        <li>Sinan Ceylan</li>
-                                                    en hebben deze webpagina in elkaar gezet om onze opdrachten te demonstreren.<br/><br/>
-                                                    <b>Als iemand in een creative bui zou ik het op prijs stellen om hier een nutvolle verhaal te typen.</b>
-						</p>
+						<h2>Contactgegevens</h2>
+                                                <p>
+                                                    <h4>Twan Baten</h4>
+                                                    <a href="mailto:??">??</a><br/>
+                                                    Student nummer: ????<br/><br/>
+                                                    <h4>Patrick Hollenberg</h4>
+                                                    <a href="mailto:??">??</a><br/>
+                                                    Student nummer: ????<br/><br/>
+                                                    <h4>Kevin Haring</h4>
+                                                    <a href="mailto:??">??</a><br/>
+                                                    Student nummer: ????<br/><br/>
+                                                    <h4>Sinan Ceylan</h4>
+                                                    <a href="mailto:sinoes_ceylan@hotmail.com">sinoes_ceylan@hotmail.com</a><br/>
+                                                    Student nummer: 500602963<br/><br/>
+                                                </p>
+                                                <a href="mailto:sinoes_ceylan@hotmail.com,??@??,??@??,??@??">Klik hier om een groepsmail te sturen!</a>
 					</div>
 				</div>
 				<br class="clearfix" />

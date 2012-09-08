@@ -37,22 +37,30 @@
 			</div>
 			<div id="header">
 				<div id="logo">
-					<h1><a href="#">Home</a></h1>
+					<h1><a href="#">Opdrachten</a></h1>
 				</div>
 			</div>
 			<div id="page">
-				<div id="content">
+				<div id="content" style="width: 655px;">
 					<div class="box">
-						<h2>Welkom bij groep 7!</h2>
+						<h2>Opdracht 7</h2>
 						<p>
-                                                    Wij zijn:
-                                                        <li>Twan Baten</li>
-                                                        <li>Patrick Hollenberg</li>
-                                                        <li>Kevin Haring</li>
-                                                        <li>Sinan Ceylan</li>
-                                                    en hebben deze webpagina in elkaar gezet om onze opdrachten te demonstreren.<br/><br/>
-                                                    <b>Als iemand in een creative bui zou ik het op prijs stellen om hier een nutvolle verhaal te typen.</b>
+                                                    Hier komt opdracht 7 te staan..
 						</p>
+					</div>
+				</div>
+				<div id="sidebar">
+					<div class="box">
+						<h3>Opdrachten Overzicht</h3>
+						<ul class="list">
+							<li class="first"><a href="opdracht1.php">Opdracht 1</a></li>
+							<li><a href="opdracht2.php">Opdracht 2</a></li>
+							<li><a href="opdracht3.php">Opdracht 3</a></li>
+							<li><a href="opdracht4.php">Opdracht 4</a></li>
+                                                        <li><a href="opdracht5.php">Opdracht 5</a></li>
+                                                        <li><a href="opdracht6.php">Opdracht 6</a></li>
+							<li class="last"><a href="opdracht7.php">Opdracht 7</a></li>
+						</ul>
 					</div>
 				</div>
 				<br class="clearfix" />
