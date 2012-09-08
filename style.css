@@ -1,0 +1,17 @@
+/* 
+    Document   : style
+    Created on : 7-sep-2012, 16:24:02
+    Author     : Sinan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body{
+    background-color: beige;
+    font-family: Verdana;
+    width: 800px;
+}
