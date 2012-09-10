@@ -52,7 +52,7 @@
                                                     <a href="mailto:p.s.hollenberg@gmail.com">p.s.hollenberg@gmail.com</a><br/>
                                                     Student nummer: 500546696<br/><br/>
                                                     <h4>Kevin Haring</h4>
-                                                    <a href="mailto:kevin.haring@hva.nl">Kevin Haring</a><br/>
+                                                    <a href="mailto:kevin.haring@hva.nl">kevin.haring@hva.nl</a><br/>
                                                     Student nummer: 500602948<br/><br/>
                                                     <h4>Sinan Ceylan</h4>
                                                     <a href="mailto:sinoes_ceylan@hotmail.com">sinoes_ceylan@hotmail.com</a><br/>
