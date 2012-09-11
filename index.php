@@ -10,19 +10,19 @@ require_once('functions.php');
 		<meta name="keywords" content="" />
 		<title>Software Testen Groep 7</title>
 		<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="/style.css" />
-		<script type="text/javascript" src="/jquery-1.7.1.min.js"></script>
-		<script type="text/javascript" src="/jquery.dropotron-1.0.js"></script>
-		<script type="text/javascript" src="/init.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="jquery.dropotron-1.0.js"></script>
+		<script type="text/javascript" src="init.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div id="splash">
-				<img src="/images/pic1.jpg" alt="" />
+				<img src="images/pic1.jpg" alt="" />
 			</div>
 			<div id="menu">
 				<ul>
-					<li><a href="/index.php">Home</a></li>
+					<li><a href="index.php">Home</a></li>
 					<li>
 						Opdrachten<span class="arrow"></span>
 						<ul>
@@ -37,12 +37,12 @@ require_once('functions.php');
                                                         <?php else : ?>
                                                             <li>
                                                         <?php endif; ?>
-                                                            <a href="/index.php?page=opdrachten/<?php echo $filename ?>.php"><?php echo ucfirst(str_replace('_', ' ', $filename)) ?></a>
+                                                            <a href="index.php?page=opdrachten/<?php echo $filename ?>.php"><?php echo ucfirst(str_replace('_', ' ', $filename)) ?></a>
                                                         </li>
                                                     <?php endfor; ?>
 						</ul>
 					</li>
-					<li><a href="/index.php?page=links.php">Links</a></li>
+					<li><a href="index.php?page=links.php">Links</a></li>
 					<li class="last"><a href="index.php?page=contact.php">Contact</a></li>
 				</ul>
 				<br class="clearfix" />
