@@ -17,6 +17,7 @@
             <p>Om SQL Injectie goed te kunnen begrijpen worden hieronder twee demonstraties gegeven met bijbehorend commentaar. De demonstraties bestaan uit twee simpele login schermen. In het eerste login scherm is het systeem niet optimaal beveiligd waardoor een kwaadwillende d.m.v. SQL Injectie zichzelf toegang kan verschaffen tot de database. In de tweede demonstratie wordt getoond hoe het systeem optimaal beveiligd kan worden met daarbij een uitleg.</p>
             <h3>Systeem Opbouw</h3>
             <div>
+                <p>Het betreft hier een patiëntenbeheersyteem van Huisartspraktijk HVA. Alle gegevens van de patiënten van de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.<p/>
                 Momenteel zitten de volgende records in de database:<br/><br/>
                 <table style="width: 50%;">
                     <thead>
@@ -50,8 +51,8 @@
                 <br/><br/>
             </div>
             <h3>Demo 1 (Niet beveiligd)</h3>
-            <p>Bij de eerste demonstratie ziet u het login scherm van Huisartspraktijk HVA. Alle gegevens van patiënten binnen de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.</p>
-            <p>Als een kwaadwillende toegang wilt krijgen tot het systeem kan hij/zij het als volgt te werk gaan:</p>
+            <p>Hieronder ziet u het login scherm van Huisartspraktijk HVA.</p>
+            <p>Als een kwaadwillende toegang wil krijgen tot het systeem kan hij/zij het als volgt te werk gaan:</p>
             <div style="width: 40%; float:left;">
                 <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 100%">
                     <h4 style="color:white; padding: 10px;">Huisartspraktijk HVA</h4>
