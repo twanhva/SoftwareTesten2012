@@ -26,16 +26,51 @@ if(isset($_POST['username'])) {
             <h2>Opdracht 1</h2>
             <h3><a href="opdrachten/questionaire_1.pdf">Download hier de questionaire!</a></h3>
             <p>
-                Voor de eerste opdracht hebben wij ervoor gekozen om de sin 'SQL Injectie' als voorbeeld te gebruiken. SQL Injectie is een manier waarbij ongeautorizeerde mensen toegang kunnen krijgen tot een systeem. 
+                Voor de eerste opdracht hebben wij ervoor gekozen om de sin 'SQL Injectie' als voorbeeld te gebruiken. SQL Injectie is een aanvalsmethode waarbij ongeautorizeerde mensen toegang kunnen krijgen tot een systeem. 
             </p>
             <p>
-                SQL Injectie kan je voorkomen door je systeem optimaal te beveiligen. Als dit niet het geval is, kunnen kwaadwillenden heel gemakkelijk toegang krijgen tot de database van het desbetreffende systeem, met als gevolg dat al je data verloren kan gaan en/of op straat kan 'liggen'.
+                SQL Injectie kan voorkomen worden door het systeem optimaal te beveiligen. Als dit niet het geval is, kunnen kwaadwillenden vaak gemakkelijk toegang krijgen tot de database van het desbetreffende systeem, met als gevolg dat al de data verloren kan gaan en/of 'op straat kan komen te liggen'.
             </p>
             <h3>Maar hoe werkt het dan precies?</h3>
-            <p>Om SQL Injectie goed te kunnen begrijpen gaan wij hieronder twee demonstraties uitvoeren met bijbehorende commentaar. De demonstratie zal bestaan uit twee simpele log in schermen. In de eerste log in scherm is het 'systeem' niet optimaal beveiligd waardoor een kwaadwillende d.m.v. SQL Injectie zichzelf toegang kan verschaffen tot de database. In de tweede demonstratie laten wij zien hoe dit optimaal beveiligd kan worden met bijbehorende commentaar.</p>
-            <h3><a id="demo1_g">Demo 1 (Geen beveiliging)</a></h3>
-            <p>Bij de eerste demonstratie ziet u het log-in scherm van Huisartspraktijk HVA. Alle gegevens van patienten binnen de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.</p>
-            <p>Als een kwaadwillende toegang wilt krijgen tot het systeem kan hij het volgende</p>
+            <p>Om SQL Injectie goed te kunnen begrijpen worden hieronder twee demonstraties gegeven met bijbehorend commentaar. De demonstraties bestaan uit twee simpele login schermen. In het eerste login scherm is het systeem niet optimaal beveiligd waardoor een kwaadwillende d.m.v. SQL Injectie zichzelf toegang kan verschaffen tot de database. In de tweede demonstratie wordt getoond hoe het systeem optimaal beveiligd kan worden met daarbij een uitleg.</p>
+            <h3>Systeem Opbouw</h3>
+            <div>
+                <p>Het betreft hier een patiëntenbeheersyteem van Huisartspraktijk HVA. Alle gegevens van de patiënten van de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.<p/>
+                Momenteel zitten de volgende records in de database:<br/><br/>
+                <table style="width: 50%;">
+                    <thead>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </thead>
+                <tbody style="text-align: center;">
+                    <tr>
+                        <td>1</td>
+                        <td>sinan</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>twan</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>patrick</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>kevin</td>
+                        <td>test</td>
+                    </tr>
+                </tbody>
+                </table>   
+                <br/><br/>
+            </div>
+            <h3>Demo 1 (Niet beveiligd)</h3>
+            <p>Hieronder ziet u het login scherm van Huisartspraktijk HVA.</p>
+            <p>Als een kwaadwillende toegang wil krijgen tot het systeem kan hij/zij het als volgt te werk gaan:</p>
             <div style="width: 40%; float:left;">
                 <form action="#demo1_g" method="post">
                 <input name="type" type="hidden" value="ALLOW_INJECTION"/>
@@ -85,36 +120,14 @@ if(isset($_POST['username'])) {
                 </div>
             </div>
             <div style=" width:55%; float: right;">
-                Momenteel zitten de volgende records in de database:<br/><br/>
-                <table style="width: 100%;">
-                    <thead>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                </thead>
-                <tbody style="text-align: center;">
-                    <?php 
-                        $f = mysql_query('SELECT * FROM users');
-                        while ($res = mysql_fetch_array($f, MYSQL_ASSOC)) { ?>
-                    <?php //var_dump($res); ?>
-                             <tr>
-                        <td><?php echo $res['id'] ?></td>
-                        <td><?php echo $res['username'] ?></td>
-                        <td><?php echo $res['password'] ?></td>
-                    </tr>
-
-                        <?php }
-                    ?>
-                    
-                </tbody>
-                </table>
-                
+                <p>Nadat er op 'Login' is gedrukt is de volgende query uitgevoerd:<br/><br/> <i>SELECT * FROM users WHERE username='Username' AND password='X' OR 1=1'</i><br/><br/> Omdat 1 gelijk is aan 1 krijgt de gebruiker in deze situatie toegang tot het systeem. De aanvaller heeft op dit systeem heel veel mogelijkheden, zo kan hij of zij zelfs al de data in de database verwijderen en/of publiceren!</p>
             </div>
+            
             <div style="clear:both;"></div>
             <br/>
-            <h3>Demo 1 (Wel beveiliging)</h3>
-            <p>Bij de eerste demonstratie ziet u het log-in scherm van Huisartspraktijk HVA. Alle gegevens van patienten binnen de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.</p>
-            <p>Als een kwaadwillende toegang wilt krijgen tot het systeem kan hij het volgende</p>
+            <h3>Demo 2 (Wel beveiligd)</h3>
+            <p>Bij de eerste demonstratie zag u het login scherm van Huisartspraktijk HVA met daarbij een systeem dat niet goed beveiligd was.</p>
+            <p>In deze demonstratie is het systeem wel beveiligd tegen SQL injectie.</p>
             <div style="width: 40%; float:left;">
                 <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 100%">
                     <h4 style="color:white; padding: 10px;">Huisartspraktijk HVA</h4>
@@ -132,7 +145,7 @@ if(isset($_POST['username'])) {
                 </div>
             </div>
             <div style=" width:55%; float: right;">
-                <p>Nadat er op 'Log in' was gedrukt is de volgende query uitgevoerd:<br/><br/> <i>SELECT * FROM users WHERE username='Username' AND password='X' OR 1=1'</i><br/><br/> Omdat 1 gelijk is aan 1 krijgt diegene dus in deze situatie toegang tot het systeem. Het zou in sommige gevallen erger kunnen uitpakken waardoor al je data in de database zelfs verwijderd kan worden!</p>
+                <p>Nadat er op 'Login' wordt gedrukt komt er een foutmelding tevoorschijn, dit is het gevolg van adequate beveiliging tegen SQL injectie.</p>
             </div>
             <div style="clear:both;"></div>
         </div>
