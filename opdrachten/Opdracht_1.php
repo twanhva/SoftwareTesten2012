@@ -146,7 +146,7 @@ $qResult = mysql_query($query);
             <div style="width: 40%; float:left;">
                 <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 100%">
                     <h4 style="color:white; padding: 10px;">Huisartspraktijk HVA</h4>
-                    <p style="color:white; margin: 0px; padding: 0px;">
+                    <p style="color:white; margin: 0px; padding: 10px;">
                         Username: <input type="text" value="Username" />
                     </p>
                     <p style="color:white; margin: 0px;padding: 10px;">
