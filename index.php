@@ -1,6 +1,7 @@
 <?php 
 require_once('functions.php');
-
+require_once('database.php');
+connect();
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -14,6 +15,9 @@ require_once('functions.php');
 		<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="jquery.dropotron-1.0.js"></script>
 		<script type="text/javascript" src="init.js"></script>
+                <style>
+                    /** {margin: 0px; padding: 0px;}*/
+                </style>
 	</head>
 	<body>
 		<div id="wrapper">
