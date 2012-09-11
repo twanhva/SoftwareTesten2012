@@ -120,7 +120,22 @@ if(isset($_POST['username'])) {
                 </div>
             </div>
             <div style=" width:55%; float: right;">
-                <p>Nadat er op 'Login' is gedrukt is de volgende query uitgevoerd:<br/><br/> <i>SELECT * FROM users WHERE username='Username' AND password='X' OR 1=1'</i><br/><br/> Omdat 1 gelijk is aan 1 krijgt de gebruiker in deze situatie toegang tot het systeem. De aanvaller heeft op dit systeem heel veel mogelijkheden, zo kan hij of zij zelfs al de data in de database verwijderen en/of publiceren!</p>
+                <p>De query die wordt opgesteld is:<br>
+                    <span style="color: green">SELECT * FROM users WHERE username = '?' AND password = '?'</span><br>
+                    Omdat de vraagtekens vervangen worden met de ingevoerde waardes komt er een mogelijk gevaarlijke query uit. Zo zou de gebruiker bijvoorbeeld kunnen inloggen door bij het username-veld <i>' OR 1=1#</i> in te vullen.
+                    De query wordt dan:<br>
+                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1#' AND password = '?'</span> waarbij alles achter de # als commentaar wordt gezien. De resulterende query is dan:<br>
+                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1</span><br>
+                    Omdat 1=1 altijd waar is zal iedere rij in de users-tabel matchen en dus worden teruggestuurd.
+                    het systeem. De aanvaller heeft op dit systeem heel veel mogelijkheden, zo kan hij of zij zelfs al de data in de database verwijderen en/of publiceren!</p>
+                    De relevante code is:
+<pre>$username = $_POST['username'];
+$password = $_POST['password'];
+$query = "SELECT * FROM users 
+            WHERE username = '" . $username . "' 
+            AND password = '" . $password . "'";
+$qResult = mysql_query($query);
+</pre>
             </div>
             
             <div style="clear:both;"></div>
@@ -146,6 +161,14 @@ if(isset($_POST['username'])) {
             </div>
             <div style=" width:55%; float: right;">
                 <p>Nadat er op 'Login' wordt gedrukt komt er een foutmelding tevoorschijn, dit is het gevolg van adequate beveiliging tegen SQL injectie.</p>
+                <p>De relevante code is:</p>
+                <pre>    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $query1 = "SELECT * FROM users 
+                WHERE username = '" . $username . "' 
+                AND password = '" . $password . "'";
+    $qResult1 = mysql_query($query1);
+</pre>
             </div>
             <div style="clear:both;"></div>
         </div>
