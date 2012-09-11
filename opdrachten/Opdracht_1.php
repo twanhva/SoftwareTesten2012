@@ -17,17 +17,50 @@
             <h3>Demo 1 (Geen beveiliging)</h3>
             <p>Bij de eerste demonstratie ziet u het log-in scherm van Huisartspraktijk HVA. Alle gegevens van patienten binnen de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.</p>
             <p>Als een kwaadwillende toegang wilt krijgen tot het systeem kan hij het volgende</p>
-            <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 40%; float:left;">
-                <h4 style="color:white; padding: 10px;">Huisartspraktijk HVA</h4>
-                <p style="color:white; padding: 10px;">Username: <input type="text" value="Username" /></p>
-                <p style="color:white; padding: 10px;">Password: <input type="password" value="password" /><br/><br/><input type="submit" value="Log in"/></p>
-
+            <div style="width: 40%; float:left;">
+                <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 100%">
+                    <h4 style="color:white; padding: 10px;">Huisartspraktijk HVA</h4>
+                    <p style="color:white; padding: 10px;">
+                        Username: <input type="text" value="Username" />
+                    </p>
+                    <p style="color:white; padding: 10px;">
+                        Password: <input type="password" value="password" /><br/>
+                        <br/>
+                        <input type="submit" value="Log in"/>
+                    </p>
+                </div>
+                <div style="background-color: #333; border: 1px solid aquamarine; width: 100%;">
+                    <h4 style="color:white; padding: 10px;">Resultaat: </h4>
+                </div>
             </div>
             <div style=" width:55%; float: right;">
                 <p>Nadat er op 'Log in' was gedrukt is de volgende query uitgevoerd:<br/><br/> <i>SELECT * FROM users WHERE username='Username' AND password='X' OR 1=1'</i><br/><br/> Omdat 1 gelijk is aan 1 krijgt diegene dus in deze situatie toegang tot het systeem. Het zou in sommige gevallen erger kunnen uitpakken waardoor al je data in de database zelfs verwijderd kan worden!</p>
             </div>
             <div style="clear:both;"></div>
-            <h3>Demo 2 (Wel beveiliging)</h3>
+            <br/>
+            <h3>Demo 1 (Wel beveiliging)</h3>
+            <p>Bij de eerste demonstratie ziet u het log-in scherm van Huisartspraktijk HVA. Alle gegevens van patienten binnen de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.</p>
+            <p>Als een kwaadwillende toegang wilt krijgen tot het systeem kan hij het volgende</p>
+            <div style="width: 40%; float:left;">
+                <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 100%">
+                    <h4 style="color:white; padding: 10px;">Huisartspraktijk HVA</h4>
+                    <p style="color:white; margin: 0px; padding: 0px;">
+                        Username: <input type="text" value="Username" />
+                    </p>
+                    <p style="color:white; margin: 0px;padding: 10px;">
+                        Password: <input type="password" value="password" /><br/>
+                        <br/>
+                        <input type="submit" value="Log in"/>
+                    </p>
+                </div>
+                <div style="background-color: #333; border: 1px solid aquamarine; width: 100%;">
+                    <h4 style="color:white; padding: 10px;">Resultaat: </h4>
+                </div>
+            </div>
+            <div style=" width:55%; float: right;">
+                <p>Nadat er op 'Log in' was gedrukt is de volgende query uitgevoerd:<br/><br/> <i>SELECT * FROM users WHERE username='Username' AND password='X' OR 1=1'</i><br/><br/> Omdat 1 gelijk is aan 1 krijgt diegene dus in deze situatie toegang tot het systeem. Het zou in sommige gevallen erger kunnen uitpakken waardoor al je data in de database zelfs verwijderd kan worden!</p>
+            </div>
+            <div style="clear:both;"></div>
         </div>
     </div>
     <br class="clearfix" />
