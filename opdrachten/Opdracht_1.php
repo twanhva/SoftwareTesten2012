@@ -24,17 +24,65 @@
                         Username: <input type="text" value="Username" />
                     </p>
                     <p style="color:white; padding: 10px;">
-                        Password: <input type="password" value="password" /><br/>
+                        Password: <input type="text" value="password" /><br/>
                         <br/>
                         <input type="submit" value="Log in"/>
                     </p>
                 </div>
-                <div style="background-color: #333; border: 1px solid aquamarine; width: 100%;">
+                <div style="background-color: #333; border: 1px solid aquamarine; width: 100%; color: white;">
                     <h4 style="color:white; padding: 10px;">Resultaat: </h4>
+                    <p style="padding-left:10px;">De volgende query is zojuist uitgevoerd:<br/>
+                    <i>***QUERY***</i><br/>
+                Hieruit kwam het volgende resultaat:<br>
+                <table style="color: white; width: 100%;">
+                    <thead>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </thead>
+                <tbody style="text-align: center;">
+                    <tr>
+                        <td>??</td>
+                        <td>??</td>
+                        <td>??</td>
+                    </tr>
+                </tbody>
+                </table>
+                </p>
                 </div>
             </div>
             <div style=" width:55%; float: right;">
-                <p>Nadat er op 'Log in' was gedrukt is de volgende query uitgevoerd:<br/><br/> <i>SELECT * FROM users WHERE username='Username' AND password='X' OR 1=1'</i><br/><br/> Omdat 1 gelijk is aan 1 krijgt diegene dus in deze situatie toegang tot het systeem. Het zou in sommige gevallen erger kunnen uitpakken waardoor al je data in de database zelfs verwijderd kan worden!</p>
+                Momenteel zitten de volgende records in de database:<br/><br/>
+                <table style="width: 100%;">
+                    <thead>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </thead>
+                <tbody style="text-align: center;">
+                    <tr>
+                        <td>1</td>
+                        <td>sinan</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>twan</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>patrick</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>kevin</td>
+                        <td>test</td>
+                    </tr>
+                </tbody>
+                </table>
+                
             </div>
             <div style="clear:both;"></div>
             <br/>
