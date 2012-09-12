@@ -3,15 +3,16 @@ if(isset($_POST['username'])) {
     if($_POST['type'] == 'ALLOW_INJECTION') {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $query = "SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $password . "'";
-        $qResult = mysql_query($query);
+        $query1 = "SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $password . "'";
+        $qResult1 = mysql_query($query1);
     } else {
-//        $username = $_POST['username'];
-//        $password = $_POST['password'];
-//        $query = "SELECT * FROM users WHERE username = ? AND password = ?";
-//        $stmt = $conn->prepare($query);
-//        $stmt->bind_param('ssi', $username, $password);
-        
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $query2 = "SELECT * FROM users WHERE username = :username AND password = :password";
+        $stmt = $dbh->prepare($query2);
+        $stmt->bindParam('username', $username);
+        $stmt->bindParam('password', $password);
+        $stmt->execute();
     }
     
 }
@@ -36,49 +37,42 @@ if(isset($_POST['username'])) {
             <h3>Systeem Opbouw</h3>
             <div>
                 <p>Het betreft hier een patiëntenbeheersyteem van Huisartspraktijk HVA. Alle gegevens van de patiënten van de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.<p/>
-                Momenteel zitten de volgende records in de database:<br/><br/>
-                <table style="width: 50%;">
+                Momenteel zitten de volgende records in de database:<br/>
+                <table style="width: 100%;">
                     <thead>
                     <th>Id</th>
                     <th>Username</th>
                     <th>Password</th>
                 </thead>
                 <tbody style="text-align: center;">
-                    <tr>
-                        <td>1</td>
-                        <td>sinan</td>
-                        <td>test</td>
+                    <?php 
+                        $f = mysql_query('SELECT * FROM users');
+                        while ($res = mysql_fetch_array($f, MYSQL_ASSOC)) { ?>
+                    <?php //var_dump($res); ?>
+                             <tr>
+                        <td><?php echo $res['id'] ?></td>
+                        <td><?php echo $res['username'] ?></td>
+                        <td><?php echo $res['password'] ?></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>twan</td>
-                        <td>test</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>patrick</td>
-                        <td>test</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>kevin</td>
-                        <td>test</td>
-                    </tr>
+
+                        <?php }
+                    ?>
+                    
                 </tbody>
-                </table>   
+                </table> 
                 <br/><br/>
             </div>
-            <h3>Demo 1 (Niet beveiligd)</h3>
+            <h3><a id="demo_niet_beveiligd">Demo 1 (Niet beveiligd)</a></h3>
             <p>Hieronder ziet u het login scherm van Huisartspraktijk HVA.</p>
             <p>Als een kwaadwillende toegang wil krijgen tot het systeem kan hij/zij het als volgt te werk gaan:</p>
             <div style="width: 40%; float:left;">
-                <form action="#demo1_g" method="post">
+                <form action="#demo_niet_beveiligd" method="post">
                 <input name="type" type="hidden" value="ALLOW_INJECTION"/>
                 <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 100%">
                     <h4 style="color:white; padding-left: 10px;">Huisartspraktijk HVA</h4>
                     <p style="color:white; padding-left: 10px;">
-                        Username: <input type="text" name="username" value="Username" /><br/>
-                        Password: <input type="text" name="password" value="password" />
+                        Username: <input type="text" name="username" value="<?php echo (isset($_POST['username']) ? $_POST['username'] : '') ?>" /><br/>
+                        Password: <input type="text" name="password" value="<?php echo (isset($_POST['password']) ? $_POST['password'] : '') ?>" />
                         <input type="submit" value="Log in"/>
                     </p>
                 </div>
@@ -86,7 +80,7 @@ if(isset($_POST['username'])) {
                 <div style="background-color: #333; border: 1px solid aquamarine; width: 100%; color: white;">
                     <h4 style="color:white; padding-left: 10px;">Resultaat: </h4>
                     <p style="padding-left:10px;">De volgende query is zojuist uitgevoerd:<br/>
-                    <i><?php echo (isset($query) ? $query : '--') ?></i><br/>
+                    <i><?php echo (isset($query1) ? $query1 : '--') ?></i><br/>
                 Hieruit kwam het volgende resultaat:<br>
                 <table style="color: white; width: 100%;">
                     <thead>
@@ -96,8 +90,8 @@ if(isset($_POST['username'])) {
                 </thead>
                 <tbody style="text-align: center;">
                     <?php 
-                    if(isset($qResult))  {
-                        while ($res = mysql_fetch_array($qResult, MYSQL_ASSOC)) { ?>
+                    if(isset($qResult1))  {
+                        while ($res = mysql_fetch_array($qResult1, MYSQL_ASSOC)) { ?>
                     <?php //var_dump($res); ?>
                              <tr>
                         <td><?php echo $res['id'] ?></td>
@@ -119,17 +113,16 @@ if(isset($_POST['username'])) {
                 </p>
                 </div>
             </div>
-            <div style=" width:55%; float: right;">
-                <p>De query die wordt opgesteld is:<br>
-                    <span style="color: green">SELECT * FROM users WHERE username = '?' AND password = '?'</span><br>
-                    Omdat de vraagtekens vervangen worden met de ingevoerde waardes komt er een mogelijk gevaarlijke query uit. Zo zou de gebruiker bijvoorbeeld kunnen inloggen door bij het username-veld <i>' OR 1=1#</i> in te vullen.
-                    De query wordt dan:<br>
-                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1#' AND password = '?'</span> waarbij alles achter de # als commentaar wordt gezien. De resulterende query is dan:<br>
-                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1</span><br>
-                    Omdat 1=1 altijd waar is zal iedere rij in de users-tabel matchen en dus worden teruggestuurd.
+            <div style=" width:55%; float: right; padding-right: 30px">
+                <p>De query die wordt opgesteld is:
+                    <span style="color: green">SELECT * FROM users WHERE username = '?' AND password = '?'</span>. Omdat de vraagtekens vervangen worden met de ingevoerde waardes komt er een mogelijk gevaarlijke query uit. Zo zou de gebruiker bijvoorbeeld kunnen inloggen door bij het username-veld <i>' OR 1=1#</i> in te vullen.
+                    De query wordt dan:
+                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1#' AND password = '?'</span> waarbij alles achter de # als commentaar wordt gezien. De resulterende query is dan:
+                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1</span>. Omdat 1=1 altijd waar is zal iedere rij in de users-tabel matchen en dus worden teruggestuurd.
                     het systeem. De aanvaller heeft op dit systeem heel veel mogelijkheden, zo kan hij of zij zelfs al de data in de database verwijderen en/of publiceren!</p>
                     De relevante code is:
-<pre>$username = $_POST['username'];
+<pre>
+$username = $_POST['username'];
 $password = $_POST['password'];
 $query = "SELECT * FROM users 
             WHERE username = '" . $username . "' 
@@ -140,36 +133,73 @@ $qResult = mysql_query($query);
             
             <div style="clear:both;"></div>
             <br/>
-            <h3>Demo 2 (Wel beveiligd)</h3>
-            <p>Bij de eerste demonstratie zag u het login scherm van Huisartspraktijk HVA met daarbij een systeem dat niet goed beveiligd was.</p>
-            <p>In deze demonstratie is het systeem wel beveiligd tegen SQL injectie.</p>
+            <h3><a id="demo_beveiligd">Demo 1 (Beveiligd)</a></h3>
+            <p>Hieronder ziet u het login scherm van Huisartspraktijk HVA.</p>
+            <p>Als een kwaadwillende toegang wil krijgen tot het systeem kan hij/zij het als volgt te werk gaan:</p>
             <div style="width: 40%; float:left;">
+                <form action="#demo_beveiligd" method="post">
+                <input name="type" type="hidden" value="NO_INJECTION"/>
                 <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 100%">
-                    <h4 style="color:white; padding: 10px;">Huisartspraktijk HVA</h4>
-                    <p style="color:white; margin: 0px; padding: 10px;">
-                        Username: <input type="text" value="Username" />
-                    </p>
-                    <p style="color:white; margin: 0px;padding: 10px;">
-                        Password: <input type="password" value="password" /><br/>
-                        <br/>
+                    <h4 style="color:white; padding-left: 10px;">Huisartspraktijk HVA</h4>
+                    <p style="color:white; padding-left: 10px;">
+                        Username: <input type="text" name="username" value="<?php echo (isset($_POST['username']) ? $_POST['username'] : '') ?>" /><br/>
+                        Password: <input type="text" name="password" value="<?php echo (isset($_POST['password']) ? $_POST['password'] : '') ?>" />
                         <input type="submit" value="Log in"/>
                     </p>
                 </div>
-                <div style="background-color: #333; border: 1px solid aquamarine; width: 100%;">
-                    <h4 style="color:white; padding: 10px;">Resultaat: </h4>
+                </form>
+                <div style="background-color: #333; border: 1px solid aquamarine; width: 100%; color: white;">
+                    <h4 style="color:white; padding-left: 10px;">Resultaat: </h4>
+                    <p style="padding-left:10px;">De volgende query is zojuist uitgevoerd:<br/>
+                    <i><?php echo (isset($query2) ? $query2 : '--') ?></i><br/>
+                Hieruit kwam het volgende resultaat:<br>
+                <table style="color: white; width: 100%;">
+                    <thead>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </thead>
+                <tbody style="text-align: center;">
+                    <?php 
+                    if(isset($stmt))  {
+                        while ($res = $stmt->fetch()) { ?>
+                    <?php //var_dump($res); ?>
+                             <tr>
+                        <td><?php echo $res['id'] ?></td>
+                        <td><?php echo $res['username'] ?></td>
+                        <td><?php echo $res['password'] ?></td>
+                    </tr>
+
+                        <?php }
+                    } else { ?>
+                        <tr>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                    </tr>
+                    <?php }
+                    ?>
+                </tbody>
+                </table>
+                </p>
                 </div>
             </div>
-            <div style=" width:55%; float: right;">
-                <p>Nadat er op 'Login' wordt gedrukt komt er een foutmelding tevoorschijn, dit is het gevolg van adequate beveiliging tegen SQL injectie.</p>
-                <p>De relevante code is:</p>
-                <pre>    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $query1 = "SELECT * FROM users 
-                WHERE username = '" . $username . "' 
-                AND password = '" . $password . "'";
-    $qResult1 = mysql_query($query1);
+            <div style=" width:55%; float: right; padding-right: 30px">
+                <p>Nadat er op 'Login' is gedrukt is de volgende query uitgevoerd:<br/><br/> <i>SELECT * FROM users WHERE username='Username' AND password='X' OR 1=1'</i><br/><br/> Omdat 1 gelijk is aan 1 krijgt de gebruiker in deze situatie toegang tot het systeem. De aanvaller heeft op dit systeem heel veel mogelijkheden, zo kan hij of zij zelfs al de data in de database verwijderen en/of publiceren!</p>
+                De relevante code is:
+<pre>
+$username = $_POST['username'];
+$password = $_POST['password'];
+$query2 = "SELECT * FROM users 
+            WHERE username = :username 
+            AND password = :password";
+$stmt = $dbh->prepare($query2);
+$stmt->bindParam('username', $username);
+$stmt->bindParam('password', $password);
+$stmt->execute();
 </pre>
             </div>
+            
             <div style="clear:both;"></div>
         </div>
     </div>
