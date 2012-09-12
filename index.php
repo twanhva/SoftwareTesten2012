@@ -32,7 +32,7 @@ connect();
 						<ul>
                                                     <?php 
                                                         $filenames = get_files_in_dir('./opdrachten');
-                                                        for($i = 0; $i < count($filenames) && $i <= 0; $i++) : ?>
+                                                        for($i = 0; $i < count($filenames); $i++) : ?>
                                                         <?php $filename = $filenames[$i];
                                                         if($i == 0) : ?>
                                                             <li class="first">

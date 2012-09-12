@@ -3,7 +3,7 @@ function get_files_in_dir($dir) {
     $filenames = array();
     if ($handle = opendir($dir)) {
         while (false !== ($entry = readdir($handle))) {
-            if(!in_array($entry, array('.', '..'))) {
+            if(!in_array($entry, array('.', '..')) && stripos($entry,'opdracht') !== false) {
                 //$stpos = (($stpos = strpos($entry, '_')) === false ? 0 : $stpos + 1);
                 //$filenames[] = substr($entry, $stpos, strpos($entry, '.') - $stpos);
                 $filenames[] = substr($entry, 0, strpos($entry, '.'));
@@ -11,6 +11,7 @@ function get_files_in_dir($dir) {
         }
         closedir($handle);
     }
+    sort($filenames);
     return $filenames;
 }
 
