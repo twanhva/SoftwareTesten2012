@@ -38,7 +38,7 @@ if(isset($_POST['username'])) {
             <div>
                 <p>Het betreft hier een patiëntenbeheersyteem van Huisartspraktijk HVA. Alle gegevens van de patiënten van de praktijk zijn vertrouwelijk en zijn daarom beschermd met een unieke gebruikersnaam en een wachtwoord.<p/>
                 Momenteel zitten de volgende records in de database:<br/>
-                <table style="width: 100%;">
+                <table style="width: 400px;">
                     <thead>
                     <th>Id</th>
                     <th>Username</th>
@@ -114,28 +114,31 @@ if(isset($_POST['username'])) {
                 </div>
             </div>
             <div style=" width:55%; float: right; padding-right: 30px">
-                <p>De query die wordt opgesteld is:
-                    <span style="color: green">SELECT * FROM users WHERE username = '?' AND password = '?'</span>. Omdat de vraagtekens vervangen worden met de ingevoerde waardes komt er een mogelijk gevaarlijke query uit. Zo zou de gebruiker bijvoorbeeld kunnen inloggen door bij het username-veld <i>' OR 1=1#</i> in te vullen.
-                    De query wordt dan:
-                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1#' AND password = '?'</span> waarbij alles achter de # als commentaar wordt gezien. De resulterende query is dan:
-                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1</span>. Omdat 1=1 altijd waar is zal iedere rij in de users-tabel matchen en dus worden teruggestuurd.
+                                <p>De query die wordt opgesteld is:<br>
+                    <span style="color: green">SELECT * FROM users WHERE username = '?' AND password = '?'</span><br>
+                    Omdat de vraagtekens vervangen worden met de ingevoerde waardes komt er een mogelijk gevaarlijke query uit. Zo zou de gebruiker bijvoorbeeld kunnen inloggen door bij het username-veld <i>' OR 1=1#</i> in te vullen.
+                    De query wordt dan:<br>
+                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1#' AND password = '?'</span> waarbij alles achter de # als commentaar wordt gezien. De resulterende query is dan:<br>
+                    <span style="color: green">SELECT * FROM users WHERE username = '' OR 1=1</span><br>
+                    Omdat 1=1 altijd waar is zal iedere rij in de users-tabel matchen en dus worden teruggestuurd.
                     het systeem. De aanvaller heeft op dit systeem heel veel mogelijkheden, zo kan hij of zij zelfs al de data in de database verwijderen en/of publiceren!</p>
                     De relevante code is:
-<pre>
-$username = $_POST['username'];
+<pre>$username = $_POST['username'];
 $password = $_POST['password'];
 $query = "SELECT * FROM users 
             WHERE username = '" . $username . "' 
             AND password = '" . $password . "'";
 $qResult = mysql_query($query);
 </pre>
+
             </div>
             
             <div style="clear:both;"></div>
             <br/>
-            <h3><a id="demo_beveiligd">Demo 1 (Beveiligd)</a></h3>
-            <p>Hieronder ziet u het login scherm van Huisartspraktijk HVA.</p>
-            <p>Als een kwaadwillende toegang wil krijgen tot het systeem kan hij/zij het als volgt te werk gaan:</p>
+            <h3><a id="demo_beveiligd">Demo 2 (Wel Beveiligd)</a></h3>
+            <p>Bij de eerste demonstratie zag u het login scherm van Huisartspraktijk HVA met daarbij een systeem dat niet goed beveiligd was.</p>
+            <p>In deze demonstratie is het systeem wel beveiligd tegen SQL injectie, dit door middel van <a href="http://php.net/manual/en/pdo.prepared-statements.php">Prepared Statements</a>.</p>
+
             <div style="width: 40%; float:left;">
                 <form action="#demo_beveiligd" method="post">
                 <input name="type" type="hidden" value="NO_INJECTION"/>
@@ -185,7 +188,7 @@ $qResult = mysql_query($query);
                 </div>
             </div>
             <div style=" width:55%; float: right; padding-right: 30px">
-                <p>Nadat er op 'Login' is gedrukt is de volgende query uitgevoerd:<br/><br/> <i>SELECT * FROM users WHERE username='Username' AND password='X' OR 1=1'</i><br/><br/> Omdat 1 gelijk is aan 1 krijgt de gebruiker in deze situatie toegang tot het systeem. De aanvaller heeft op dit systeem heel veel mogelijkheden, zo kan hij of zij zelfs al de data in de database verwijderen en/of publiceren!</p>
+                <p>Nadat er op 'Login' wordt gedrukt met een poging tot SQL injectie zal er geen resultaat komen, dit is het gevolg van adequate beveiliging tegen SQL injectie.</p>
                 De relevante code is:
 <pre>
 $username = $_POST['username'];
