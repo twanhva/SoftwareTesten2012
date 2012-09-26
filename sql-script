@@ -1,0 +1,61 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Server version: 5.5.25
+-- PHP Version: 5.4.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `SoftwareTesten`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guestbook`
+--
+
+CREATE TABLE `guestbook` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(256) DEFAULT NULL,
+  `message` longtext,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `guestbook`
+--
+
+INSERT INTO `guestbook` (`id`, `username`, `message`, `time`) VALUES
+(1, 'Kevin', '<script>alert("Got You!");</script>', '2012-09-26 16:27:37'),
+(2, 'Twan', 'Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2', '2012-09-26 16:26:37'),
+(3, 'Patrick', 'Test', '2012-09-26 18:18:40'),
+(4, 'Sinan', 'Test', '2012-09-26 18:21:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(1, 'kevin', 'test'),
+(2, 'twan', 'test'),
+(3, 'sinan', 'test'),
+(4, 'patrick', 'test');

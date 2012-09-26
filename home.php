@@ -15,7 +15,6 @@
             <li>Sinan Ceylan</li>
             en hebben deze webpagina in elkaar gezet om onze opdrachten te demonstreren.<br/>
             <br/>
-            <b>Als iemand in een creative bui zou ik het op prijs stellen om hier een nutvolle verhaal te typen.</b>
             </p>
         </div>
     </div>
