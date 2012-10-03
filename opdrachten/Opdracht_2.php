@@ -49,7 +49,50 @@ $qResult = mysql_query($query);
     <div id="content">
         <div class="box">
             <h2>Opdracht 2</h2>
+            
+            <p>
+                Voor de tweede, en tevens laatste, opdracht is het de bedoeling dat de sin Web Server-Related Vulnerabilities wordt uitgelegd door middel van een demonstratie. Deze sin bestaat uit meerdere kwetsbaarheden, namelijk Cross-site Scripting(XSS), HTTP Response Splitting en Cross-site Request Forgery(XSRF). In deze opdracht hoeft er slechts een van de drie te worden gedemonstreerd. De keuze is voor ons gevallen op XSS.
+            </p>
+            
+            <h3>Wat_is_XSS</h3>
+            
+            <p>
+                Voor de tweede, en tevens laatste, opdracht is het de bedoeling dat de sin Web Server-Related Vulnerabilities wordt uitgelegd door middel van een demonstratie. Deze sin bestaat uit meerdere kwetsbaarheden, namelijk Cross-site Scripting(XSS), HTTP Response Splitting en Cross-site Request Forgery(XSRF). In deze opdracht hoeft er slechts een van de drie te worden gedemonstreerd. De keuze is voor ons gevallen op XSS.
+            </p>
+            
+            <h4>DOM-Based_XSS</h4>
+            
+            <p>
+                Met dit type XSS, ook wel Local XSS genoemd(type 0), kan bijvoorbeeld een session cookie gestolen worden. Hiermee kan een aanvaller zonder in het bezit te zijn van een gebruikersnaam en wachtwoord het account overnemen van een nietsvermoedende bezoeker. 
+De aanvaller doet dit door een argument in de URL van een kwetsbare website te vervangen door een JavaScript fragment, zoals hieronder is afgebeeld.
+            </p>
+            
+            <p>
+                <script src="https://gist.github.com/3829164.js?file=gistfile1.html"></script>
+            </p>
+            
+            <p>
+                Als de website op enig moment de parameter default opvraagt en op de pagina weergeeft zonder de juiste beveiliging, dan wordt er een alert getoont met de inhoud van de session cookie. In dit fragment wordt een alert getoond, maar deze kwetsbaarheid kan op allerlei andere manier uitgebuit worden.
+            </p>
+            
+            <h4>Reflected_XSS</h4>
+            
+            <p>
+                Dit type XSS, ook wel Non Persistent XSS genoemd(type 1), is de meest voorkomende van de
+drie. Een klassiek voorbeeld van deze manier van XSS is een zoekmachine die zijn invoer
+rechtstreeks weergeeft op de resultatenpagina zonder enige vorm van beveiliging. Het heet
+Reflected XSS omdat deze manier van aanvallen meteen zichtbaar/merkbaar is voor de
+gebruiker.
+            </p>
+            
+            <h4>Stored_XSS</h4>
+            <p>
+                Dit type XSS, ook wel Persistent XSS genoemd(type 2), heeft een veel grotere impact dan de andere manieren van XSS. Bij type 2 van XSS wordt namelijk de gevaarlijke code van de aanvaller opgeslagen op de server. De code heeft dus meestal een blijvend effect en kan dus schade blijven aanrichten.<br/> 
+Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staat namelijk een gastenboek waarin de bezoeker een bericht kan achterlaten dat vervolgens getoond wordt bij de berichten van vorige bezoekers. Bij onvoldoende beveiliging kan een aanvaller malafide code meesturen in het bericht. Elke bezoeker die vervolgens deze pagina bezoekt zal te maken krijgen met XSS. Nu is het in dit geval een demonstratiepagina, maar dit kan, indien niet juist beveiligd, ook plaatsvinden op een website als YouTube die miljoenen bezoekers op een dag krijgt.
+            </p>
 
+            <hr/><br/>
+            <h4>Stored XSS: Gastenboek Demonstratie</h4>
             <div style="float: left; width: 450px;">
                 <?php
                 if (isset($qResult)) {
@@ -112,6 +155,8 @@ $qResult = mysql_query($query);
             </div>
 
         </div>
+        <hr/><br/>
+        
     </div>
     <br class="clearfix" />
 </div>
