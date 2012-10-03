@@ -79,7 +79,7 @@ De aanvaller doet dit door een argument in de URL van een kwetsbare website te v
                 Als de website op enig moment de parameter default opvraagt en op de pagina weergeeft zonder de juiste beveiliging, dan wordt er een alert getoont met de inhoud van de session cookie. In dit fragment wordt een alert getoond, maar deze kwetsbaarheid kan op allerlei andere manier uitgebuit worden.
             </p>
             
-            <h4>Reflected_XSS</h4>
+            <h4><a id="reflected">Reflected_XSS</a></h4>
             
             <p>
                 Dit type XSS, ook wel Non Persistent XSS genoemd(type 1), is de meest voorkomende van de
@@ -88,6 +88,48 @@ rechtstreeks weergeeft op de resultatenpagina zonder enige vorm van beveiliging.
 Reflected XSS omdat deze manier van aanvallen meteen zichtbaar/merkbaar is voor de
 gebruiker.
             </p>
+            
+            
+            
+            
+            
+            <div style="width: 40%; float:left;">
+                <form action="#reflected" method="post">
+                <input name="type" type="hidden" value="ALLOW_INJECTION"/>
+                <div style="background-color: #4f798e; border: 1px solid aquamarine; width: 100%">
+                    <h4 style="color:white; padding-left: 10px;">Search engine</h4>
+                    <p style="color:white; padding-left: 10px;">
+                        <input style="width: 150px" type="text" name="search-query" value="<?php echo isset($_POST['search-query']) ? htmlentities($_POST['search-query']) : '' ?>"/>
+                        <input name="search-unsafe" type="submit" value="Search unsafe"/>
+                        <input name="search-safe" type="submit" value="Search safe"/>
+                    </p>
+                </div>
+                </form>
+                <div style="background-color: #333; border: 1px solid aquamarine; width: 100%; color: white;">
+                    <p style="color:white; padding-left: 10px;"><?php if(isset($_POST['search-query'])): ?>
+            Searching for '<?php 
+            if(isset($_POST['search-safe'])) {
+                echo 'dsds'.htmlentities($_POST['search-query']);
+            } else {
+                echo $_POST['search-query'];
+            }
+            ?>'
+            <?php else : ?>
+            Enter search expression
+            <?php endif; ?>
+                    </p>
+                </div>
+            </div>
+            
+            
+            <div style="clear: both"></div>
+            <br/>
+            <br/>
+            
+            
+            
+            
+            
             
             <h4>Stored_XSS</h4>
             <p>
@@ -115,30 +157,22 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
                     while ($res = mysql_fetch_array($qResult, MYSQL_ASSOC)) {
                         // If the 'safe' form has been used to submit a message and the checkbox is unchecked, then protect
                         // against Cross Site Scripting by using htmlentities.
-                        if (!empty($_POST['safe-submit']) && !isset($_POST['showCSS'])) {
+                        $useSafe = true || (!empty($_POST['safe-submit']) && !isset($_POST['showCSS']));
+                        $message = $useSafe ? htmlentities($res['message']) : $res['message'];
+                        $username = $useSafe ? htmlentities($res['username']) : $res['username'];
+                        $id = $useSafe ? htmlentities($res['id']) : $res['id'];
+                        $time = $useSafe ? htmlentities($res['time']) : $res['time'];
+                        
                             ?>
                             <div style="margin-bottom: 10px; width: 400px; min-height: 70px; border: 2px solid #333">
                                 <div style="width: 100%; min-height: 50px; border-bottom: 2px dotted #333;">
-                                    <p style="line-height: 16px; margin: 5px; word-wrap: break-word; font-style: italic; font-size: 12px"><?php echo htmlentities($res['message']) ?></p>
+                                    <p style="line-height: 16px; margin: 5px; word-wrap: break-word; font-style: italic; font-size: 12px"><?php echo $message ?></p>
                                 </div>
                                 <div style="height: 20px; width: 100%;">
-                                    <p style="text-align: center; font-style: italic; font-size: 10px">By <?php echo htmlentities($res['username']."(".$res['id'].")") ?> On <?php echo htmlentities($res['time']) ?></p>
+                                    <p style="text-align: center; font-style: italic; font-size: 10px">By <?php echo $username."(".$id.")" ?> On <?php echo $time ?></p>
                                 </div>
                             </div>
-
-                            <?php
-                        } else {
-                            ?>
-                            <div style="margin-bottom: 10px; width: 400px; min-height: 70px; border: 2px solid #333">
-                                <div style="width: 100%; min-height: 50px; border-bottom: 2px dotted #333;">
-                                    <p style="line-height: 16px; margin: 5px; word-wrap: break-word; font-style: italic; font-size: 12px"><?php echo $res['message'] ?></p>
-                                </div>
-                                <div style="height: 20px; width: 100%;">
-                                    <p style="text-align: center; font-style: italic; font-size: 10px">By <?php echo $res['username']."(".$res['id'].")" ?> On <?php echo $res['time'] ?></p>
-                                </div>
-                            </div>
-                            <?php
-                        }
+                <?php
                     }
                 }
                 ?>
