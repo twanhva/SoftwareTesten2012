@@ -109,11 +109,11 @@ gebruiker.
                     <p style="color:white; padding-left: 10px;"><?php if(isset($_POST['search-query'])): ?>
             Searching for '<?php 
             if(isset($_POST['search-safe'])) {
-                echo 'dsds'.htmlentities($_POST['search-query']);
+                echo htmlentities($_POST['search-query']);
             } else {
                 echo $_POST['search-query'];
             }
-            ?>'
+            ?>'...
             <?php else : ?>
             Enter search expression
             <?php endif; ?>
