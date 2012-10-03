@@ -54,10 +54,14 @@ $qResult = mysql_query($query);
                 Voor de tweede, en tevens laatste, opdracht is het de bedoeling dat de sin Web Server-Related Vulnerabilities wordt uitgelegd door middel van een demonstratie. Deze sin bestaat uit meerdere kwetsbaarheden, namelijk Cross-site Scripting(XSS), HTTP Response Splitting en Cross-site Request Forgery(XSRF). In deze opdracht hoeft er slechts een van de drie te worden gedemonstreerd. De keuze is voor ons gevallen op XSS.
             </p>
             
-            <h3>Wat_is_XSS</h3>
+            <h3>Wat_is_XSS?</h3>
             
             <p>
-                Voor de tweede, en tevens laatste, opdracht is het de bedoeling dat de sin Web Server-Related Vulnerabilities wordt uitgelegd door middel van een demonstratie. Deze sin bestaat uit meerdere kwetsbaarheden, namelijk Cross-site Scripting(XSS), HTTP Response Splitting en Cross-site Request Forgery(XSRF). In deze opdracht hoeft er slechts een van de drie te worden gedemonstreerd. De keuze is voor ons gevallen op XSS.
+                XSS is een kwetsbaarheid die kan worden uitgebuit zowel aan de server kant als de client kant. De gevolgen van XSS kunnen heel extreem zijn, zo kunnen cookies gestolen worden, de webpagina van nietsvermoedende bezoekers aangepast of vervangen worden en kan er potentieel allerlei andere (belangrijke) informatie doorgesluist worden naar de aanvaller.
+            </p>
+            
+            <p>
+                Er zijn drie types van XSS, in de volgende drie paragrafen worden de verschillende types behandeld met daarbij maatregelen die moeten worden getroffen om het type XSS te voorkomen.
             </p>
             
             <h4>DOM-Based_XSS</h4>
@@ -68,7 +72,7 @@ De aanvaller doet dit door een argument in de URL van een kwetsbare website te v
             </p>
             
             <p>
-                <script src="https://gist.github.com/3829164.js?file=gistfile1.html"></script>
+                <script src="https://gist.github.com/3829164.js?file=DOM-Based XSS"></script>
             </p>
             
             <p>
@@ -89,6 +93,18 @@ gebruiker.
             <p>
                 Dit type XSS, ook wel Persistent XSS genoemd(type 2), heeft een veel grotere impact dan de andere manieren van XSS. Bij type 2 van XSS wordt namelijk de gevaarlijke code van de aanvaller opgeslagen op de server. De code heeft dus meestal een blijvend effect en kan dus schade blijven aanrichten.<br/> 
 Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staat namelijk een gastenboek waarin de bezoeker een bericht kan achterlaten dat vervolgens getoond wordt bij de berichten van vorige bezoekers. Bij onvoldoende beveiliging kan een aanvaller malafide code meesturen in het bericht. Elke bezoeker die vervolgens deze pagina bezoekt zal te maken krijgen met XSS. Nu is het in dit geval een demonstratiepagina, maar dit kan, indien niet juist beveiligd, ook plaatsvinden op een website als YouTube die miljoenen bezoekers op een dag krijgt.
+            </p>
+            
+            <p>
+                Om dit type XSS op te lossen is het belangrijk om alle output, dus in dit geval het laten zien van de comments, ge-encode wordt naar HTML. In PHP wordt dit gedaan met het volgende code fragment.
+            </p>
+            
+            <p>
+                <script src="https://gist.github.com/3829326.js?file=Stored XSS Prevention"></script>
+            </p>
+            
+            <p>
+                De methode htmlentities zorgt ervoor dat de JavaScript code die geinjecteerd is, wordt omgezet naar ge-encode HTML characters. Hierdoor wordt je JavaScript code zichtbaar voor de bezoeker en wordt het niet uitgevoerd als JavaScript zijnde.
             </p>
 
             <hr/><br/>
