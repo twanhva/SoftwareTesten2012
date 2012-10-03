@@ -131,6 +131,19 @@ gebruiker.
             
             
             
+            <p>
+                Om dit type XSS op te voorkomen is het belangrijk om alle output ge-encode wordt naar HTML. Daarnaast wordt er in dit geval een reguliere expressie op de input losgelaten die controleert of er geen vreemde tekens in de input staan. In PHP wordt dit gedaan met het volgende code fragment.
+            </p>
+            
+            <p>
+                <script src="https://gist.github.com/3829411.js?file=Reflected XSS Prevention"></script>
+            </p>
+            
+            
+            <p>
+                Met de methode preg_match wordt ervoor gezorgd dat alleen letters, cijfers en underscores ingevoerd kunnen worden. De methode htmlentities zorgt ervoor dat de JavaScript code die eventueel geinjecteerd is, wordt omgezet naar ge-encode HTML characters.
+            </p>
+            
             <h4>Stored_XSS</h4>
             <p>
                 Dit type XSS, ook wel Persistent XSS genoemd(type 2), heeft een veel grotere impact dan de andere manieren van XSS. Bij type 2 van XSS wordt namelijk de gevaarlijke code van de aanvaller opgeslagen op de server. De code heeft dus meestal een blijvend effect en kan dus schade blijven aanrichten.<br/> 
@@ -138,7 +151,7 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
             </p>
             
             <p>
-                Om dit type XSS op te lossen is het belangrijk om alle output, dus in dit geval het laten zien van de comments, ge-encode wordt naar HTML. In PHP wordt dit gedaan met het volgende code fragment.
+                Om dit type XSS op te voorkomen is het belangrijk om alle output, dus in dit geval het laten zien van de comments, ge-encode wordt naar HTML. In PHP wordt dit gedaan met het volgende code fragment.
             </p>
             
             <p>
@@ -146,7 +159,7 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
             </p>
             
             <p>
-                De methode htmlentities zorgt ervoor dat de JavaScript code die geinjecteerd is, wordt omgezet naar ge-encode HTML characters. Hierdoor wordt je JavaScript code zichtbaar voor de bezoeker en wordt het niet uitgevoerd als JavaScript zijnde.
+                De methode htmlentities zorgt ervoor dat de JavaScript code die geinjecteerd is, wordt omgezet naar ge-encode HTML characters. Hierdoor wordt de JavaScript code zichtbaar voor de bezoeker en wordt het niet uitgevoerd als JavaScript zijnde.
             </p>
 
             <hr/><br/>
@@ -197,7 +210,7 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
                         <p style="color:white; width: 100%">
                             Name: <input style="height: 20px; width: 150px" type="text" name="username" value="" /><br/>
                             Message: <br/><textarea style="resize: none; width: 100%; min-height: 100px" name="message"></textarea>
-                            <input type="checkbox" name="showCSS" value="showCSS" /> Show potential Cross Site Scripting<br/>
+                            <input type="checkbox" name="showCSS" value="showCSS" /> Show Cross Site Scripting(Unsafe!)<br/>
                             <input style="margin-top: 10px" name="safe-submit" type="submit" value="Submit"/>
                         </p>
                     </div>
