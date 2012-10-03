@@ -16,26 +16,6 @@ if (!empty($_POST['unsafe-submit'])) {
     $stmt->execute();
 }
 
-if (!empty($_POST['safe-submit'])) {
-    // Trim away whitespace
-    $username = trim($_POST['username']);
-    // Check for empty username and for usage of only alphabetical characters. If positive condition, 
-    // then set username to Anonymous
-    if(empty($username) || !preg_match("[a-zA-z]{2, 256}", $username)) {
-        $username = "Anonymous";
-    }
-    
-    // Shorten message input to a maximum of 500 characters
-    $message = substr($_POST['message'], 0, 500);
-    
-    // Execute query to insert the data into the database
-    $query = "INSERT INTO `guestbook`(`username`, `message`) VALUES (:username, :message)";
-    $stmt = $dbh->prepare($query);
-    $stmt->bindParam('username', $username);
-    $stmt->bindParam('message', $message);
-    $stmt->execute();
-}
-
 $query = "SELECT * FROM (Select * FROM guestbook ORDER BY time DESC LIMIT 5) AS t";
 $qResult = mysql_query($query);
 ?>
@@ -84,12 +64,9 @@ De aanvaller doet dit door een argument in de URL van een kwetsbare website te v
             </p>
             
             <p>
-                <a href="#&message=&lt;script>alert('Got You!');</script>">Deze link is onveilig!</a>
+                <a href="index.php?page=domXSS.php&message=&lt;script>alert('Got You!');</script>">Deze link is onveilig!</a>
             </p>
-            <script>
-                eval(document.location.href.substring(document.location.href.indexOf("message=")+8));
-                document.write("Uw bericht is: " + document.location.href.substring(document.location.href.indexOf("message=")+8));
-            </script>
+
             <p>
                 Om niet afhankelijk te zijn van moderne browser is het zaak om zelf een beveiligingsmechanisme in te bouwen. Aangeraden worden om client-side encoding te gebruiken, maar dat is ook niet in alle omgevingen veilig. Een goede oplossing is om, indien er een malafide URL wordt gedetecteerd door bevoorbeeld een reguliere expressie op de input los te laten, de aanvraag compleet te weigeren. Hieronder staat een link waarbij de input wordt gecontroleerd door een regulier expressie die tevens in de code snippet te zien is.
             </p>
@@ -146,7 +123,7 @@ gebruiker.
             <br/>
 
             <p>
-                Om dit type XSS op te voorkomen is het belangrijk om alle output ge-encode wordt naar HTML. Daarnaast wordt er in dit geval een reguliere expressie op de input losgelaten die controleert of er geen vreemde tekens in de input staan. In PHP wordt dit gedaan met het volgende code fragment.
+                Om dit type XSS op te voorkomen is het belangrijk om alle output ge-encode wordt naar HTML. In PHP wordt dit gedaan met het volgende code fragment.
             </p>
             
             <p>
@@ -155,7 +132,7 @@ gebruiker.
             
             
             <p>
-                Met de methode preg_match wordt ervoor gezorgd dat alleen letters, cijfers en underscores ingevoerd kunnen worden. De methode htmlentities zorgt ervoor dat de JavaScript code die eventueel geinjecteerd is, wordt omgezet naar ge-encode HTML characters.
+                De methode htmlentities zorgt ervoor dat de JavaScript code die eventueel geinjecteerd is, wordt omgezet naar ge-encode HTML characters.
             </p>
             
             <h4>Stored_XSS</h4>
@@ -218,19 +195,6 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
                             Name: <input style="height: 20px; width: 150px" type="text" name="username" value="" /><br/>
                             Message: <br/><textarea style="resize: none; width: 100%; min-height: 100px" name="message"></textarea>
                             <input style="margin-top: 10px" name="unsafe-submit" type="submit" value="Submit"/>
-                        </p>
-                    </div>
-                </form>
-
-                <form style="margin-top: 10px" method="post">
-                    <input name="type" type="hidden" value="ALLOW_CSS"/>
-                    <div style="padding: 2%; background-color: #4f798e; border: 1px solid aquamarine; width: 96%">
-                        <h4 style="color:white;">Leave_a_message_(Safe)</h4>
-                        <p style="color:white; width: 100%">
-                            Name: <input style="height: 20px; width: 150px" type="text" name="username" value="" /><br/>
-                            Message: <br/><textarea style="resize: none; width: 100%; min-height: 100px" name="message"></textarea>
-                            <input type="checkbox" name="showCSS" value="showCSS" /> Show Cross Site Scripting(Unsafe!)<br/>
-                            <input style="margin-top: 10px" name="safe-submit" type="submit" value="Submit"/>
                         </p>
                     </div>
                 </form>
