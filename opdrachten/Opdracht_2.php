@@ -191,7 +191,7 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
                 <form method="post">
                     <input name="type" type="hidden" value="ALLOW_CSS"/>
                     <div style="padding: 2%; background-color: #4f798e; border: 1px solid aquamarine; width: 96%">
-                        <h4 style="color:white;">Leave_a_message_(Unsafe)</h4>
+                        <h4 style="color:white;">Leave_a_message</h4>
                         <p style="color:white; width: 100%">
                             Name: <input style="height: 20px; width: 150px" type="text" name="username" value="" /><br/>
                             Message: <br/><textarea style="resize: none; width: 100%; min-height: 100px" name="message"></textarea>
