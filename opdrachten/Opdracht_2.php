@@ -84,9 +84,12 @@ De aanvaller doet dit door een argument in de URL van een kwetsbare website te v
             </p>
             
             <p>
-                <a href="index.php?page=domXSS.php&message=<script>alert('Got You!');</script>">Deze link is onveilig!</a>
+                <a href="#&message=&lt;script>alert('Got You!');</script>">Deze link is onveilig!</a>
             </p>
-            
+            <script>
+                eval(document.location.href.substring(document.location.href.indexOf("message=")+8));
+                document.write("Uw bericht is: " + document.location.href.substring(document.location.href.indexOf("message=")+8));
+            </script>
             <p>
                 Om niet afhankelijk te zijn van moderne browser is het zaak om zelf een beveiligingsmechanisme in te bouwen. Aangeraden worden om client-side encoding te gebruiken, maar dat is ook niet in alle omgevingen veilig. Een goede oplossing is om, indien er een malafide URL wordt gedetecteerd door bevoorbeeld een reguliere expressie op de input los te laten, de aanvraag compleet te weigeren. Hieronder staat een link waarbij de input wordt gecontroleerd door een regulier expressie die tevens in de code snippet te zien is.
             </p>
@@ -174,14 +177,19 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
             </p>
 
             <hr/><br/>
-            <h4>Stored XSS: Gastenboek Demonstratie</h4>
+            <h4><a id="stored">Stored XSS: Gastenboek Demonstratie</a></h4>
+            <form action="index.php?page=opdrachten/Opdracht_2.php#stored" method="post">
+            <input type="submit" name="reload-safe" value="Reload safe"/>
+            <input type="submit" name="reload-unsafe" value="Reload unsafe"/>
+            </form>
             <div style="float: left; width: 450px;">
                 <?php
                 if (isset($qResult)) {
                     while ($res = mysql_fetch_array($qResult, MYSQL_ASSOC)) {
                         // If the 'safe' form has been used to submit a message and the checkbox is unchecked, then protect
                         // against Cross Site Scripting by using htmlentities.
-                        $useSafe = true || (!empty($_POST['safe-submit']) && !isset($_POST['showCSS']));
+                       // $useSafe = (!empty($_POST['safe-submit2']) && !isset($_POST['showCSS']));
+                        $useSafe = !isset($_POST['reload-unsafe']);
                         $message = $useSafe ? htmlentities($res['message']) : $res['message'];
                         $username = $useSafe ? htmlentities($res['username']) : $res['username'];
                         $id = $useSafe ? htmlentities($res['id']) : $res['id'];
