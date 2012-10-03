@@ -77,6 +77,26 @@ De aanvaller doet dit door een argument in de URL van een kwetsbare website te v
             
             <p>
                 Als de website op enig moment de parameter default opvraagt en op de pagina weergeeft zonder de juiste beveiliging, dan wordt er een alert getoont met de inhoud van de session cookie. In dit fragment wordt een alert getoond, maar deze kwetsbaarheid kan op allerlei andere manier uitgebuit worden.
+            </p>   
+
+            <p>
+                Tegenwoordig worden script tags door de browser ge-encode naar HTML en worden DOM-based XSS aanvallen daarmee afgeweerd. Hieronder staat een link die naar een DOM-Based XSS aanval leidt.
+            </p>
+            
+            <p>
+                <a href="index.php?page=domXSS.php&message=<script>alert('Got You!');</script>">Deze link is onveilig!</a>
+            </p>
+            
+            <p>
+                Om niet afhankelijk te zijn van moderne browser is het zaak om zelf een beveiligingsmechanisme in te bouwen. Aangeraden worden om client-side encoding te gebruiken, maar dat is ook niet in alle omgevingen veilig. Een goede oplossing is om, indien er een malafide URL wordt gedetecteerd door bevoorbeeld een reguliere expressie op de input los te laten, de aanvraag compleet te weigeren. Hieronder staat een link waarbij de input wordt gecontroleerd door een regulier expressie die tevens in de code snippet te zien is.
+            </p>
+            
+            <p>
+                <a href="index.php?page=domXSSFixed.php&message=<script>alert('Got You!');</script>">Deze link is veilig!</a>
+            </p>
+            
+            <p>
+                <script src="https://gist.github.com/3829962.js?file=DOM-Based XSS Prevention"></script>
             </p>
             
             <h4><a id="reflected">Reflected_XSS</a></h4>
@@ -88,10 +108,6 @@ rechtstreeks weergeeft op de resultatenpagina zonder enige vorm van beveiliging.
 Reflected XSS omdat deze manier van aanvallen meteen zichtbaar/merkbaar is voor de
 gebruiker.
             </p>
-            
-            
-            
-            
             
             <div style="width: 40%; float:left;">
                 <form action="#reflected" method="post">
@@ -125,12 +141,7 @@ gebruiker.
             <div style="clear: both"></div>
             <br/>
             <br/>
-            
-            
-            
-            
-            
-            
+
             <p>
                 Om dit type XSS op te voorkomen is het belangrijk om alle output ge-encode wordt naar HTML. Daarnaast wordt er in dit geval een reguliere expressie op de input losgelaten die controleert of er geen vreemde tekens in de input staan. In PHP wordt dit gedaan met het volgende code fragment.
             </p>
