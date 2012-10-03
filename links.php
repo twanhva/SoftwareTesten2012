@@ -12,7 +12,7 @@
             <li><a href="www.wikipedia.org">Wikipedia</a></li>
             <h3>Opdracht 2</h3>
             <li><a href="www.wikipedia.org">Wikipedia</a></li>
-            <li><a hrhref="https://www.owasp.org/index.php/Main_Page">OWASP</a>
+            <li><a href="https://www.owasp.org/index.php/Main_Page">OWASP</a></li>
         </div>
     </div>
     <br class="clearfix" />
