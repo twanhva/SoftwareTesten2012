@@ -47,7 +47,7 @@ $qResult = mysql_query($query);
             <h4>DOM-Based_XSS</h4>
             
             <p>
-                Met dit type XSS, ook wel Local XSS genoemd(type 0), kan bijvoorbeeld een session cookie gestolen worden. Hiermee kan een aanvaller zonder in het bezit te zijn van een gebruikersnaam en wachtwoord het account overnemen van een nietsvermoedende bezoeker. 
+                Met dit type XSS, ook wel Local XSS genoemd (type 0), kan bijvoorbeeld een session cookie gestolen worden. Hiermee kan een aanvaller zonder in het bezit te zijn van een gebruikersnaam en wachtwoord het account overnemen van een nietsvermoedende bezoeker. 
 De aanvaller doet dit door een argument in de URL van een kwetsbare website te vervangen door een JavaScript fragment, zoals hieronder is afgebeeld.
             </p>
             
@@ -82,7 +82,7 @@ De aanvaller doet dit door een argument in de URL van een kwetsbare website te v
             <h4><a id="reflected">Reflected_XSS</a></h4>
             
             <p>
-                Dit type XSS, ook wel Non Persistent XSS genoemd(type 1), is de meest voorkomende van de
+                Dit type XSS, ook wel Non Persistent XSS genoemd (type 1), is de meest voorkomende van de
 drie. Een klassiek voorbeeld van deze manier van XSS is een zoekmachine die zijn invoer
 rechtstreeks weergeeft op de resultatenpagina zonder enige vorm van beveiliging. Het heet
 Reflected XSS omdat deze manier van aanvallen meteen zichtbaar/merkbaar is voor de
@@ -123,26 +123,26 @@ gebruiker.
             <br/>
 
             <p>
-                Om dit type XSS op te voorkomen is het belangrijk om alle output ge-encode wordt naar HTML. In PHP wordt dit gedaan met het volgende code fragment.
+                Om dit type XSS op te voorkomen is het belangrijk dat alle output ge-encode wordt naar HTML. Uiteraard zou een stukje input validatie ook niet mistaan. In PHP wordt het encoden gedaan met het volgende code fragment.
             </p>
             
             <p>
-                <script src="https://gist.github.com/3829411.js?file=Reflected XSS Prevention"></script>
+                <script src="https://gist.github.com/f2d922c78ccc7cd58fd2.js?file=Reflected XSS Prevention"></script>
             </p>
             
             
             <p>
-                De methode htmlentities zorgt ervoor dat de JavaScript code die eventueel geinjecteerd is, wordt omgezet naar ge-encode HTML characters.
+                De methode htmlentities zorgt ervoor dat de JavaScript code die eventueel geinjecteerd is, wordt omgezet naar ge-encode HTML characters die veilig weergegeven kunnen worden.
             </p>
             
             <h4>Stored_XSS</h4>
             <p>
-                Dit type XSS, ook wel Persistent XSS genoemd(type 2), heeft een veel grotere impact dan de andere manieren van XSS. Bij type 2 van XSS wordt namelijk de gevaarlijke code van de aanvaller opgeslagen op de server. De code heeft dus meestal een blijvend effect en kan dus schade blijven aanrichten.<br/> 
+                Dit type XSS, ook wel Persistent XSS genoemd (type 2), heeft een veel grotere impact dan de andere manieren van XSS. Bij type 2 van XSS wordt namelijk de gevaarlijke code van de aanvaller opgeslagen op de server. De code heeft dus meestal een blijvend effect en kan dus schade blijven aanrichten.<br/> 
 Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staat namelijk een gastenboek waarin de bezoeker een bericht kan achterlaten dat vervolgens getoond wordt bij de berichten van vorige bezoekers. Bij onvoldoende beveiliging kan een aanvaller malafide code meesturen in het bericht. Elke bezoeker die vervolgens deze pagina bezoekt zal te maken krijgen met XSS. Nu is het in dit geval een demonstratiepagina, maar dit kan, indien niet juist beveiligd, ook plaatsvinden op een website als YouTube die miljoenen bezoekers op een dag krijgt.
             </p>
             
             <p>
-                Om dit type XSS op te voorkomen is het belangrijk om alle output, dus in dit geval het laten zien van de comments, ge-encode wordt naar HTML. In PHP wordt dit gedaan met het volgende code fragment.
+                Om dit type XSS te voorkomen is het belangrijk dat alle output, dus in dit geval het laten zien van de comments, ge-encode wordt naar HTML. In PHP wordt dit gedaan met het volgende code fragment. Uiteraard zou het normaal een goed idee zijn om de velden bij het posten ook te valideren, maar voor de voorbeeld doeleinden hebben we dat niet gedaan.
             </p>
             
             <p>
@@ -150,7 +150,7 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
             </p>
             
             <p>
-                De methode htmlentities zorgt ervoor dat de JavaScript code die geinjecteerd is, wordt omgezet naar ge-encode HTML characters. Hierdoor wordt de JavaScript code zichtbaar voor de bezoeker en wordt het niet uitgevoerd als JavaScript zijnde.
+                Ook hier zorgt de htmlentities methode ervoor dat de JavaScript code die geinjecteerd is, wordt omgezet naar ge-encode HTML characters. Hierdoor wordt de JavaScript code zichtbaar voor de bezoeker en wordt het niet uitgevoerd als JavaScript zijnde.
             </p>
 
             <hr/><br/>
@@ -158,7 +158,8 @@ Een voorbeeld van dit type XSS is op deze pagina uitgewerkt. Op deze pagina staa
             <form action="index.php?page=opdrachten/Opdracht_2.php#stored" method="post">
             <input type="submit" name="reload-safe" value="Reload safe"/>
             <input type="submit" name="reload-unsafe" value="Reload unsafe"/>
-            </form>
+            </form><br/>
+            
             <div style="float: left; width: 450px;">
                 <?php
                 if (isset($qResult)) {
